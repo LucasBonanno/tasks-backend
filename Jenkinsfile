@@ -3,13 +3,11 @@ pipeline {
 	stages {
 		stage('Build Backend') {
 			steps {
-			# comando mvn para limpar e empacotar porém não executar os testes
 				bat 'mvn clean package -DskipTests=true'
 			}
 		}
 		stage('Unit Tests') {
 			steps {
-			# aqui sim executa os testes
 				bat 'mvn test'
 			}
 		}
