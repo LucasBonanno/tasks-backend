@@ -33,6 +33,14 @@ pipeline {
 				}
 			}
 		}
+		stage('Functional Test') {
+			steps {
+				dir('functional-test') {
+					git credentialsId: 'gitHubLogig', url: 'https://github.com/LucasBonanno/tasks-functional-tests'
+					bat 'mvn test'
+				}
+			}
+		}
 	}
 }
 
