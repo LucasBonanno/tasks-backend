@@ -41,6 +41,14 @@ pipeline {
 				}
 			}
 		}
+			stage('Deploy Prod') {
+			steps {
+				dir('functional-test') {
+					bat 'docker-compose build'
+					bat 'docker-compose up -d'
+				}
+			}
+		}
 	}
 }
 
