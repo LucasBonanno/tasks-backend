@@ -41,11 +41,20 @@ pipeline {
 				}
 			}
 		}
-			stage('Deploy Prod') {
+		stage('Deploy Prod') {
 			steps {
 				dir('functional-test') {
 					bat 'docker-compose build'
 					bat 'docker-compose up -d'
+				}
+			}
+		}
+		stage('Health Check') {
+			steps {
+				sleep(5) {
+					dir('functional-test') {
+						bat 'mvn verify -Dskip.surefire.tests'
+					}
 				}
 			}
 		}
